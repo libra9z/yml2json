@@ -116,7 +116,7 @@ func checkFileIsExist(filename string) bool {
 }
 
 func createVarFile(s string) {
-	mfile := "docs/docsvar.go"
+	mfile := "./docs/docsvar.go"
 	var mf *os.File
 	var err error
 	if checkFileIsExist(mfile) { //如果文件存在
