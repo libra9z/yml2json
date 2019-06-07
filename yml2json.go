@@ -116,11 +116,11 @@ func checkFileIsExist(filename string) bool {
 }
 
 func createVarFile(s string) {
-	mfile := "./docs/docsvar.go"
+	mfile := "docs/docsvar.go"
 	var mf *os.File
 	var err error
 	if checkFileIsExist(mfile) { //如果文件存在
-		mf, err = os.OpenFile(mfile, os.O_TRUNC|os.O_CREATE, os.ModePerm) //打开文件
+		mf, err = os.OpenFile(mfile, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, os.ModePerm) //打开文件
 	} else {
 		mf, err = os.Create(mfile) //创建文件
 	}
