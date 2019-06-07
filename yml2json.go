@@ -133,7 +133,11 @@ func createVarFile(s string) {
 	var c = " package docs"
 	var c1 = "	var doc = ` "
 
-	mf.WriteString(c)
+	_, err = mf.WriteString(c)
+	if err != nil {
+		fmt.Printf("不能写入文件：%v\n", err)
+		return
+	}
 	mf.WriteString("\n")
 	mf.WriteString(c1)
 	mf.WriteString(s)
