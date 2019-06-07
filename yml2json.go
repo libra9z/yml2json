@@ -65,7 +65,7 @@ func toJson(src, dst string, gov bool) {
 
 	var mf *os.File
 	if checkFileIsExist(dst) { //如果文件存在
-		mf, err = os.OpenFile(dst, os.O_TRUNC|os.O_CREATE, os.ModePerm) //打开文件
+		mf, err = os.OpenFile(dst, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, os.ModePerm) //打开文件
 	} else {
 		mf, err = os.Create(dst) //创建文件
 	}
@@ -90,7 +90,7 @@ func toYaml(src, dst string) {
 
 	var mf *os.File
 	if checkFileIsExist(dst) { //如果文件存在
-		mf, err = os.OpenFile(dst, os.O_TRUNC|os.O_CREATE, os.ModePerm) //打开文件
+		mf, err = os.OpenFile(dst, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, os.ModePerm) //打开文件
 	} else {
 		mf, err = os.Create(dst) //创建文件
 	}
