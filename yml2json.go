@@ -65,7 +65,7 @@ func toJson(src, dst string, gov bool) {
 
 	var mf *os.File
 	if checkFileIsExist(dst) { //如果文件存在
-		mf, err = os.OpenFile(dst, os.O_TRUNC|os.O_CREATE, os.ModePerm) //打开文件
+		mf, err = os.OpenFile(dst, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, os.ModePerm) //打开文件
 	} else {
 		mf, err = os.Create(dst) //创建文件
 	}
@@ -90,7 +90,7 @@ func toYaml(src, dst string) {
 
 	var mf *os.File
 	if checkFileIsExist(dst) { //如果文件存在
-		mf, err = os.OpenFile(dst, os.O_TRUNC|os.O_CREATE, os.ModePerm) //打开文件
+		mf, err = os.OpenFile(dst, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, os.ModePerm) //打开文件
 	} else {
 		mf, err = os.Create(dst) //创建文件
 	}
@@ -120,7 +120,7 @@ func createVarFile(s string) {
 	var mf *os.File
 	var err error
 	if checkFileIsExist(mfile) { //如果文件存在
-		mf, err = os.OpenFile(mfile, os.O_TRUNC|os.O_CREATE, os.ModePerm) //打开文件
+		mf, err = os.OpenFile(mfile, os.O_TRUNC|os.O_CREATE|os.O_WRONLY, os.ModePerm) //打开文件
 	} else {
 		mf, err = os.Create(mfile) //创建文件
 	}
@@ -133,7 +133,11 @@ func createVarFile(s string) {
 	var c = " package docs"
 	var c1 = "	var doc = ` "
 
-	mf.WriteString(c)
+	_, err = mf.WriteString(c)
+	if err != nil {
+		fmt.Printf("不能写入文件：%v\n", err)
+		return
+	}
 	mf.WriteString("\n")
 	mf.WriteString(c1)
 	mf.WriteString(s)
